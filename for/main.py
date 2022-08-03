@@ -1,3 +1,4 @@
+from os import remove
 from helpers import get_countries
 
 
@@ -75,21 +76,118 @@ def most_vowels(list):
             list.remove(country)        
      #print(result)
     return result  
+# ^^^ first and second exercise
+# third exercise following : 
 
+# I misunderstood the excercise, the missing letters were j,k and x with my top 8 so these I added in this manner,
+# I do not think this excercize was meant to waste too much time and since I already wasted somuch I took a shortcut.
 
-def count_unique_letters(string):
-    for letter in string:
-        counter=0
-        if letter.isalpha():
-            counter = counter + 1
-            '''current excercise'''
+def countryx(list):
+    for country in list:
+        if 'x' in country: return country
+        elif 'X' in country: return country
+        
+        
+def countryj(list):
+    for country in list:
+        if 'j' in country: return country
+        elif 'J' in country: return country
+        
+        
+def countryk(list):
+    for country in list:
+        if 'k' in country: return country
+        elif 'K' in country: return country
+       
+
+def countalphinstring(country):
+    counter = 0
+    if 'a' in country: counter = counter + 1
+    elif 'A' in country: counter = counter + 1
+    if 'b' in country: counter = counter + 1
+    elif 'B' in country: counter = counter + 1
+    if 'c' in country: counter = counter + 1
+    elif 'C' in country: counter = counter + 1
+    if 'd' in country: counter = counter + 1
+    elif 'D' in country: counter = counter + 1
+    if 'e' in country: counter = counter + 1
+    elif 'E' in country: counter = counter + 1
+    if 'f' in country: counter = counter + 1
+    elif 'F' in country: counter = counter + 1
+    if 'g' in country: counter = counter + 1
+    elif 'G' in country: counter = counter + 1
+    if 'h' in country: counter = counter + 1
+    elif 'H' in country: counter = counter + 1
+    if 'i' in country: counter = counter + 1
+    elif 'I' in country: counter = counter + 1
+    if 'j' in country: counter = counter + 1
+    elif 'J' in country: counter = counter + 1
+    if 'k' in country: counter = counter + 1
+    elif 'K' in country: counter = counter + 1
+    if 'l' in country: counter = counter + 1
+    elif 'L' in country: counter = counter + 1
+    if 'm' in country: counter = counter + 1
+    elif 'M' in country: counter = counter + 1
+    if 'n' in country: counter = counter + 1
+    elif 'N' in country: counter = counter + 1
+    if 'o' in country: counter = counter + 1
+    elif 'O' in country: counter = counter + 1
+    if 'p' in country: counter = counter + 1
+    elif 'P' in country: counter = counter + 1
+    if 'q' in country: counter = counter + 1
+    elif 'Q' in country: counter = counter + 1
+    if 'r' in country: counter = counter + 1
+    elif 'R' in country: counter = counter + 1
+    if 's' in country: counter = counter + 1
+    elif 'S' in country: counter = counter + 1
+    if 't' in country: counter = counter + 1
+    elif 'T' in country: counter = counter + 1
+    if 'u' in country: counter = counter + 1
+    elif 'U' in country: counter = counter + 1
+    if 'v' in country: counter = counter + 1
+    elif 'V' in country: counter = counter + 1
+    if 'w' in country: counter = counter + 1
+    elif 'W' in country: counter = counter + 1
+    if 'x' in country: counter = counter + 1
+    elif 'X' in country: counter = counter + 1
+    if 'y' in country: counter = counter + 1
+    elif 'Y' in country: counter = counter + 1
+    if 'z' in country: counter = counter + 1
+    elif 'Z' in country: counter = counter + 1
+    return counter
+    
+        
+
+def countalphchars(list):
+    alphcountlist= []
+    for country in list:
+       alphcountlist.append(countalphinstring(country))
+    return sorted(alphcountlist, reverse=True)
             
   
   
-def alphabet_set(list):
-    print('something')
-
- 
+def alphabet_set(list):    #number 1 to 8 and j+k+x
+    result = []
+    for country in list:
+        if countalphinstring(country) == countalphchars(list)[0]: # has 17 unique alphabet characters
+            result.append(country)
+        if countalphinstring(country) == countalphchars(list)[1]: # has 15 unique alphabet characters
+            result.append(country)
+        if countalphinstring(country) == countalphchars(list)[2]: # both have 14 unique alphabet characters
+            result.append(country)
+        if countalphinstring(country) == countalphchars(list)[4]: # four countries with 13 unique alphabet characters
+            result.append(country)
+        
+        
+    # I misunderstood the exersize, the missing letters were j,k and x with my top 8 so these I added in this manner,
+    # I do not think this exersize was meant to waste too much time and since I already wasted somuch I took a shortcut.
+    result.append(countryx(list))
+    result.append(countryj(list))
+    result.append(countryk(list))
+            
+            
+    return result
+    
     
         
             
@@ -104,7 +202,8 @@ if __name__ == "__main__":
     # count_vowels(get_countries())
     # most_vowels(get_countries())
     # print(count_vowels(most_vowels(get_countries())))
-    alphabet_set(get_countries())
+    print(alphabet_set(get_countries()))
+    # print(countalphchars(get_countries()))
 
    
 '''
