@@ -1,30 +1,46 @@
 __winc_id__ = "ae539110d03e49ea8738fd413ac44ba8"
 __human_name__ = "files"
 
+import os
 
-#current exercize
-from functools import cache
-from os import mkdir
+current_dir=os.path.join(os.getcwd(), 'files')
+cache_dir=os.path.join(current_dir, 'cache')
 
-
+#1
 def clean_cache():
-  #  delete directory cache
-  #  makedir cache
+    if os.path.isdir(cache_dir):
+        for all in os.listdir(cache_dir):
+            os.remove(os.path.join(cache_dir, all))
+        print("cache directory is present, and contents cleared")
+    else:    
+        os.mkdir(cache_dir)
+        print("cache directory was absent, and new one created")
+
+#2
+import zipfile
+
+def cache_zip(zip, dir):
+    if zipfile.is_zipfile(zip):
+        with zipfile.ZipFile(zip, mode="r") as archive:
+            archive.extractall(dir)
+    else:
+        print(f'{zip} is not a zipfile')
     
-
-'''
-In main.py, write the following functions:
-
-clean_cache: takes no arguments and creates an empty folder named cache in the current directory. If it already exists, it deletes everything in the cache folder.
-
-cache_zip: takes a zip file path (str) and a cache dir path (str) as arguments, in that order. The function then unpacks the indicated zip file into a clean cache folder.
-
-You can test this with data.zip file.
-
-cached_files: takes no arguments and returns a list of all the files in the cache. The file paths should be specified in absolute terms. Search the web for what this means! No folders should be included in the list. You do not have to account for files within folders within the cache directory.
-
-find_password: takes the list of file paths from cached_files as an argument. This function should read the text in each one to see if the password is in there. Surely there should be a word in there to indicate the presence of the password? Once found, find_password should return this password string.
-
-Wincpy Check
-Use wincpy check files to see if you met all of the requirements for this assignment. Did you pass the test?
-'''
+#3
+def cached_files():
+    cached_files=[]
+    for all in os.listdir(cache_dir):
+        cached_files.append(os.path.join(cache_dir, all))
+    return cached_files
+  
+#4
+def find_password(filelist):
+    indicator = 'password'
+    for every in filelist:
+        current_file = open(every, "r")
+        for line in current_file:
+            if indicator in line:
+                print(f'{indicator} found in {every}')
+                print(line)
+                return line[10:].strip()
+        current_file.close()
