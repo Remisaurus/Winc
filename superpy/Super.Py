@@ -1,8 +1,9 @@
 # Imports
+import interface # file with the makeshift interface for super.py 
+import file_manipulation # used to make,mutate and delete files and folders
 import argparse # Parser for command-line options, arguments and subcommands
+import sys # used to further interface with the user
 import csv # comma seperated values (major in spreadsheets and databases)
-from datetime import date
-import assignment
 
 # Do not change these lines.
 __winc_id__ = "a2bc36ea784242e4989deb157d527ba0"
@@ -10,9 +11,13 @@ __human_name__ = "superpy"
 
 
 # Your code below this line.
-def main():
-    assignment.print_assignment()
-    
+def main(): 
+    print('')
+    file_manipulation.dir_maker()  
+    file_manipulation.file_maker()
+    file_manipulation.time_file_maker()
+    print('')
+    interface.interface()
 '''
 here are three command-line fundamentals you should search the web for before you dive into the exercise:
 
