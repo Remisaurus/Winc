@@ -62,3 +62,14 @@ def reset_data():
     time_file_maker()
     
     
+    '''
+    with open(file_manipulation.AQUIRED_FILE, mode='w') as csv_file:
+        fieldnames = ['product_name', 'date_of_aquisition', 'birth_month']
+        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
+
+        writer.writeheader()
+        writer.writerow({'emp_name': 'John Smith', 'dept': 'Accounting', 'birth_month': 'November'})
+        writer.writerow({'emp_name': 'Erica Meyers', 'dept': 'IT', 'birth_month': 'March'})
+        '''
+    
+    

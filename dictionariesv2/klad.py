@@ -9,6 +9,8 @@ if not 'oh' in dic:
 
 
 print(dic)
+print(type(dic))
+print(dic['is'])
 
 dic['dic2']=dic2
 
