@@ -129,11 +129,12 @@ To assist your explanation you may use code snippets.
 
 def print_interface_help():
     print('''
-          To use the interface, follow the onscreen instructions.
-          The program can also be controlled with command lines,
-          more information on that can be found in the help file you can retreive using -h as the command line extension.
+          To use the interface, start it and follow the onscreen instructions.
+          The program can also be controlled with command lines.
+          More information on the command lines can be found in the help file you can retrieve 
+          using -h as the command line extension.
           
-          In time, the program's time and date can be set (hours or days).
-          In stock, inventory can be added removed or the current can be shown.
+          In time, the program's date can be set (in days from the now).
+          In stock, inventory can be added, removed or the current inventory can be shown.
           In info, you can find this file and the assignment.
           ''')

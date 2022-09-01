@@ -17,6 +17,11 @@ def get_date_now_datetime_form():
 def get_time_set():
     return get_time_now()
 
+# function to return a datetime object from year, month and day.
+# provide valid arguments. time will be defaulted at 00:00 (0 A.M. midnight)
+def get_date_form(yyyy, mm, dd):
+    return datetime.datetime.strptime(f'{yyyy}-{mm}-{dd}-0', '%Y-%m-%d-%H')
+
 # function to retrieve the date set within the program (returns string dd mm yyyy).
 def get_date_set():
     with open(file_manipulation.SET_DATE_FILE, 'r')as boss:

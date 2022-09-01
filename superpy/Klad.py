@@ -8,7 +8,7 @@ class object():
     
 dit = object('iets', 8)
 
-
+x = input('push enter: ')
 
 dic = {'gewoon':dit}
 

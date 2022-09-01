@@ -43,21 +43,24 @@ def time_file_maker():
             print('Date set file created')
 
 # function to reset time file.
+# not tested with pytest
 def reset_time():
     with open(SET_DATE_FILE, 'w') as boss:
         boss.write('now')
     
 # function to replace the set date file with a new set date.
+# not tested with pytest
 def set_date(days):
     with open(SET_DATE_FILE, 'w') as boss:
         boss.write(days)
  
-# function to delete all old data files and reinstate blank files (reset).               
+# function to delete all old data files and reinstate blank files (reset).
+# not tested with pytest               
 def reset_data():
     dir_maker()
     for all in os.listdir(DATA_DIR):
         os.remove(os.path.join(DATA_DIR, all))
-    print('All old datafiles deleted')
+    print('All files in data directory deleted.')
     file_maker()
     time_file_maker()
     
