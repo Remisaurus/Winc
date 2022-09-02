@@ -52,7 +52,7 @@ def reset_time():
 # not tested with pytest
 def set_date(days):
     with open(SET_DATE_FILE, 'w') as boss:
-        boss.write(days)
+        boss.write(str(days))
  
 # function to delete all old data files and reinstate blank files (reset).
 # not tested with pytest               

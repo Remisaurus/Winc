@@ -1,9 +1,9 @@
 import os
 import sys
+from turtle import clear
 import file_manipulation
 import date_manipulation
 import stock_manipulation
-import adding_stock
 import information
 import calendar
 
@@ -11,9 +11,11 @@ import calendar
 # The command line interface will be added however, since it is a prerequisite in the assignment.
 # overall the contents of this file are not tested with pytest.
 
+# function that prompts for pushing enter.
 def push_enter():
     x = input('push enter')
 
+# function that prompts for yes or no, returns True/False ((y/n)).
 def yes_or_no():
     print('yes or no')
     x = input('')
@@ -41,9 +43,11 @@ def yes_or_no():
         print('respond with Yes or No please. (y or n is also accepted)')
         return yes_or_no()
 
+# function to clear the screen
 def clearscreen():
     os.system('cls')
-    
+
+# Interface, prompts for interface start.    
 def interface():
     print('start interface?')
     if yes_or_no() == True:
@@ -51,7 +55,8 @@ def interface():
         main_question()
     else:
         sys.exit()
-        
+
+# function to input positive number or zero, returns positive integer or zero.    
 def input_positive_number():
     this = input('positive number or 0: ')
     try:
@@ -59,12 +64,14 @@ def input_positive_number():
             return int(this)
     except ValueError:
         if this == 'exit':
+            # question has been integrated in the interface where the exit to stock_question should be possible.
             clearscreen()
-            stock_question()
+            stock_question() 
         else:
             print('Input will need to be a whole number that is 0 or higher. Try again.')
             return input_positive_number()
-        
+
+# function to input year (between 1000 and 9999).    
 def input_year():
     y = input('year (yyyy): ')
     try:
@@ -76,7 +83,8 @@ def input_year():
     except ValueError:
         print('Try again. Please input a number between 1000 and 9999.')
         return input_year()
-        
+
+# function to input month.       
 def input_month():
     m = input('month (mm): ')
     try:
@@ -88,7 +96,8 @@ def input_month():
     except ValueError:
         print('Invalid input, try again please. Monthnumbers are 1-12')
         return input_month()
-    
+
+# function to input day given year and month. 
 def input_day(y, m):
     d = input('day (dd): ')
     try:
@@ -101,6 +110,7 @@ def input_day(y, m):
         print('Invalid input, try again with a number please.')
         return input_day(y, m)
 
+# Interface, prompts for what action is wanted and redirects there. 
 def main_question():
     print('Super.Py')
     print('')
@@ -135,6 +145,7 @@ def main_question():
         print('') 
         main_question()
 
+# Interface, prompts and runs reset function if desired.
 def reset_question():
     print('This reset will delete all files in the data folder.')
     print('Are you sure?')
@@ -150,7 +161,8 @@ def reset_question():
     else:
         clearscreen()
         main_question()
-                
+        
+# Interface, prompts for what action is wanted and redirects there.                 
 def time_question():
     print('Time related business')
     print('') 
@@ -177,7 +189,8 @@ def time_question():
         print('Invalid input, please try again.')
         print('')
         time_question()
-        
+
+# Interface, prompts for what action is wanted and redirects there.        
 def stock_question():
     print('Stock related business')
     print('') 
@@ -186,7 +199,9 @@ def stock_question():
     x = input('')
     if x == 'stock':
         clearscreen()
-        print('function not implemented yet')
+        stock_manipulation.print_current_stock()
+        push_enter()
+        clearscreen()
         stock_question()
     elif x == 'add':
         clearscreen()
@@ -202,7 +217,8 @@ def stock_question():
         print('That is not a valid input, try again.')
         print('')
         stock_question()
-        
+
+# Interface, prompts for which information would like to be seen and makes a function print it.  
 def info_question():
     print('Information')
     print('') 
@@ -233,7 +249,8 @@ def info_question():
         print('')
         time_question()
         
-hiero naar boven werken met # voor functies.        
+# Interface, prompts for number, will initiate function to write this number to a text file.
+# This number will be the days offset for program's set time.
 def set_question():
     print('Setting the program\'s date')
     print('') 
@@ -294,8 +311,9 @@ def rem_question():
     try:
         if int(x) > 0:
             clearscreen()
-            print('function not implemented yet')
-            add_question()
+            removing_question(int(x))
+            clearscreen()
+            stock_question()
     except ValueError:
         if x == 'back':
             clearscreen()
@@ -304,7 +322,7 @@ def rem_question():
             print('')
             print('That input will not do. Try again.')
             print('')
-            add_question()
+            rem_question()
             
 # function which will prompt questions about items before adding those items to the stock    
 def adding_question(number):
@@ -333,9 +351,46 @@ def adding_question(number):
         d = input_day(y, m)
         stock_manipulation.add_stock(a, b, c, date_manipulation.get_date_form(y, m, d))
         print('added to stock.')
-        print(stock_manipulation.products[1].expiry_date)
         push_enter()
-        clearscreen()            
+        clearscreen()
+        
+# function which will prompt question about items before removing them from the stock          
+def removing_question(number):
+    for all in range(number+1):
+        if all == 0:
+            continue 
+        print(f'product number {all}')
+        print('product\'s name? (type exit to stop removing products)')
+        print('keep in mind this will remove ALL instances with the EXACT input name from the stock')
+        print('this action is not the same as setting stock to a sold status)')
+        a = input('name: ')
+        if a == 'exit':
+            clearscreen()
+            stock_question()
+        else:
+            if stock_manipulation.product_exists(a) == False:
+                print('')
+                print('No item by that name found in stock.')
+                push_enter()
+                clearscreen()
+            else:
+                print ('')
+                print (f'This will remove ALL instances with the name:\'{a}\' from the stock')
+                print ('are you sure?')
+                if yes_or_no() == True:
+                    stock_manipulation.removing_stock(a)
+                    print('')
+                    print(f'item(s) with the name:\'{a}\' removed from stock')
+                    push_enter()
+                    clearscreen()
+                else:
+                    print('')
+                    print('Aborting')
+                    push_enter()
+                    clearscreen()
+                    break
+            
+                    
                 
 
 
