@@ -6,7 +6,8 @@ import date_manipulation
 
 # products will become objects with this class.
 class product():
-    def __init__(self, id, name, quantity, buy_price, buy_date, expiry_date, sell_status):
+    def __init__(self, id, name, quantity, buy_price, buy_date, expiry_date, sell_status, sell_quantity = 'None', \
+        sell_price = 'None', sell_date = 'None'):
         self.id = id
         self.name = name
         self.quantity = quantity
@@ -14,6 +15,9 @@ class product():
         self.buy_datums = {buy_date:quantity}
         self.expiry_date = expiry_date
         self.sell_status = sell_status
+        self.sell_quantity = sell_quantity
+        self.sell_price = sell_price
+        self.sell_date = sell_date
 
 # dictionary containing all products as objects.
 products = {}
@@ -120,3 +124,11 @@ def print_current_stock():
                     print('')
                 else:
                     continue
+
+def overwrite_to_CSV_file():
+    file_manipulation.overwrite_CSV(products)
+    
+def load_from_CSV_file():
+    file_manipulation.load_CSV(products)
+    
+    

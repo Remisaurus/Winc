@@ -14,9 +14,6 @@ def test_DATA_DIR():
 def test_file_maker():
     file_manipulation.dir_maker()
     file_manipulation.file_maker()
-    assert os.path.isfile(os.path.join(file_manipulation.DATA_DIR, 'aquired.csv'))
-    assert os.path.isfile(os.path.join(file_manipulation.DATA_DIR, 'expired.csv'))
-    assert os.path.isfile(os.path.join(file_manipulation.DATA_DIR, 'sold.csv'))
     assert os.path.isfile(os.path.join(file_manipulation.DATA_DIR, 'current_stock.csv'))
     
 def test_time_file_maker():

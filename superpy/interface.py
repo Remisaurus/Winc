@@ -330,11 +330,22 @@ def adding_question(number):
         if all == 0:
             continue 
         print(f'product number {all}')
-        print('product\'s name? (type exit to stop adding products)')
-        a = input('name: ')
-        if a == 'exit':
-            clearscreen()
-            stock_question()
+        def get_name():
+            print('product\'s name? (type exit to stop adding products) (; is reserved)')
+            a = input('name: ')
+            if a == 'exit':
+                clearscreen()
+                stock_question()
+            if ';' in a:
+                clearscreen()
+                print('')
+                print('You cannot add a name with a \';\' in it')
+                print('try again')
+                print('')
+                return get_name()
+            else:
+                return a
+        a = get_name()
         print('quantity? (type exit to stop adding products)')
         b = input_positive_number()
         if b == 'exit':
@@ -390,8 +401,11 @@ def removing_question(number):
                     clearscreen()
                     break
             
-                    
+#stock_manipulation.add_stock('remi', 5, 100, date_manipulation.get_date_now_datetime_form())
+#stock_manipulation.add_stock('kara', 1, '100000', date_manipulation.get_date_now_datetime_form())                  
                 
 
-
-    
+#stock_manipulation.load_from_CSV_file()
+#stock_manipulation.overwrite_to_CSV_file()
+#stock_manipulation.print_current_stock()    
+#stock_manipulation.overwrite_to_CSV_file()

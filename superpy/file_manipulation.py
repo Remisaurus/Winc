@@ -1,11 +1,12 @@
 import os
+import csv
+import datetime
+
+from stock_manipulation import product
 
 # Constants for directories and files used in the code
 CURRENT_DIR = os.getcwd()
 DATA_DIR = os.path.join(CURRENT_DIR, 'data')
-AQUIRED_FILE = os.path.join(DATA_DIR, 'aquired.csv')
-EXPIRED_FILE = os.path.join(DATA_DIR, 'expired.csv')
-SOLD_FILE = os.path.join(DATA_DIR, 'sold.csv')
 CURRENT_STOCK_FILE = os.path.join(DATA_DIR, 'current_stock.csv')
 SET_DATE_FILE = os.path.join(DATA_DIR, 'set_date.txt')
 
@@ -19,21 +20,12 @@ def dir_maker():
         
 # function to create data files if they are not already present. if all are present statement is made.        
 def file_maker():
-    if  os.path.isfile(AQUIRED_FILE) and os.path.isfile(EXPIRED_FILE) and os.path.isfile(SOLD_FILE) and os.path.isfile(CURRENT_STOCK_FILE):
-        print('previous files are present.')
+    if  os.path.isfile(CURRENT_STOCK_FILE):
+        print('previous save file is present.')
     else:
-        if not os.path.isfile(AQUIRED_FILE):
-            with open(AQUIRED_FILE, 'w') as boss:
-                print('aquired file created')
-        if not os.path.isfile(EXPIRED_FILE):
-            with open(EXPIRED_FILE, 'w') as boss:
-                print('expired file created')
-        if not os.path.isfile(SOLD_FILE):
-            with open(SOLD_FILE, 'w') as boss:
-                print('sold file created')
         if not os.path.isfile(CURRENT_STOCK_FILE):
             with open(CURRENT_STOCK_FILE, 'w') as boss:
-                print('current stock file created')
+                print('current stock save file created')
                 
 # function to write a simple txt file stating the program's set date if it does not exist already.                
 def time_file_maker():
@@ -64,15 +56,29 @@ def reset_data():
     file_maker()
     time_file_maker()
     
-    
-    '''
-    with open(file_manipulation.AQUIRED_FILE, mode='w') as csv_file:
-        fieldnames = ['product_name', 'date_of_aquisition', 'birth_month']
-        writer = csv.DictWriter(csv_file, fieldnames=fieldnames)
-
-        writer.writeheader()
-        writer.writerow({'emp_name': 'John Smith', 'dept': 'Accounting', 'birth_month': 'November'})
-        writer.writerow({'emp_name': 'Erica Meyers', 'dept': 'IT', 'birth_month': 'March'})
-        '''
-    
-    
+def overwrite_CSV(dict):
+    if os.path.isfile(CURRENT_STOCK_FILE):
+        os.remove(CURRENT_STOCK_FILE)
+        print('Old file removed.')
+    file_maker()
+    with open(CURRENT_STOCK_FILE, 'w', newline='') as boss:
+        writer = csv.writer(boss, delimiter=';')
+        # writer.writerow(['id', 'name', 'quantity', 'buy price', 'buy datums', 'expiry date', 'sell status', 'sell quantity', 'sell price', 'sell date'])
+        for all in dict:   
+            writer.writerow([dict[all].id, dict[all].name , dict[all].quantity, dict[all].buy_price, \
+                dict[all].buy_datums, dict[all].expiry_date, dict[all].sell_status, dict[all].sell_quantity, \
+                dict[all].sell_price, dict[all].sell_date])
+    print('Saved.')
+            
+def load_CSV(dict):
+    with open(CURRENT_STOCK_FILE, 'r') as boss:
+        reader = csv.reader(boss, delimiter = ';')
+        for row in reader:
+            print(row[4])
+            dict[int(row[0])] = product(int(row[0]), row[1], int(row[2]), int(row[3]), row[4], \
+                datetime.datetime.strptime(row[5], '%Y-%m-%d %H:%M:%S.%f'), bool(row[6]), row[7], row[8], row[9])
+            print(datetime.datetime.strptime(row[5], '%Y-%m-%d %H:%M:%S.%f'))
+            print(type(datetime.datetime.strptime(row[5], '%Y-%m-%d %H:%M:%S.%f')))
+            #dict[row[0]].buy_datums = ast.literal_eval(row[4])
+    print('file loaded.')
+            

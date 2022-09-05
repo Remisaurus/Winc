@@ -1,7 +1,9 @@
 import date_manipulation
 import datetime
+import file_manipulation
 
-print(date_manipulation.get_date_form(2222, 2, 22))
+file_manipulation.dir_maker()
+file_manipulation.time_file_maker()
 
 def test_get_date_form():
     assert type(date_manipulation.get_date_form(2222, 2, 22)) == type(datetime.datetime.now())
