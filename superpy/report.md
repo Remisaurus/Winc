@@ -40,8 +40,10 @@ Further thinking produced a theory that it might have been easier to have the da
 The plan is at the moment to check the whole dictionary to see which items are in stock at the set time, when information is asked the whole dictionary is checked again to fetch the required information. This method is far from efficient, changes may be made later on.
 
 Appendix
-To-do list (started 04-09-22):
-second save file, dir and function has to be coded for embedded dic.
+To-do list (started 04-09-22, adittions are continually made since):
+stars (*) mean the item has been done.
+
+second save file, and function has to be coded for embedded dic.
 load function should be made proper.
 function to compare buy dates to set date should be made.
 function to compare sell dates to set date should be made.
@@ -49,6 +51,7 @@ function to count total number of possible sales at set date should be made.
 function to create sales should be made. (including deducting them from stock at set time.)
 show stock function has to be fixed to implement products not yet bought and are going to be bought.
 show sales function (up till set date) should be made.
+interface integration for command lines
 
 
 

@@ -8,6 +8,7 @@ from stock_manipulation import product
 CURRENT_DIR = os.getcwd()
 DATA_DIR = os.path.join(CURRENT_DIR, 'data')
 CURRENT_STOCK_FILE = os.path.join(DATA_DIR, 'current_stock.csv')
+BUY_DATUMS_FILE = os.path.join(DATA_DIR, 'buy_datums.csv')
 SET_DATE_FILE = os.path.join(DATA_DIR, 'set_date.txt')
 
 # function to make a data directory if not already present.
@@ -26,7 +27,13 @@ def file_maker():
         if not os.path.isfile(CURRENT_STOCK_FILE):
             with open(CURRENT_STOCK_FILE, 'w') as boss:
                 print('current stock save file created')
-                
+    if  os.path.isfile(BUY_DATUMS_FILE):
+        print('previous buy date save file is present.')
+    else:
+        if not os.path.isfile(BUY_DATUMS_FILE):
+            with open(BUY_DATUMS_FILE, 'w') as boss:
+                print('buy date save file created')
+           
 # function to write a simple txt file stating the program's set date if it does not exist already.                
 def time_file_maker():
     if not os.path.isfile(SET_DATE_FILE):
@@ -61,13 +68,17 @@ def overwrite_CSV(dict):
         os.remove(CURRENT_STOCK_FILE)
         print('Old file removed.')
     file_maker()
+    with open(BUY_DATUMS_FILE, 'w', newline='') as boss:
+        writer = csv.writer(boss, delimiter=';')
+        for every in dict[all].buy_datums
     with open(CURRENT_STOCK_FILE, 'w', newline='') as boss:
         writer = csv.writer(boss, delimiter=';')
         # writer.writerow(['id', 'name', 'quantity', 'buy price', 'buy datums', 'expiry date', 'sell status', 'sell quantity', 'sell price', 'sell date'])
         for all in dict:   
             writer.writerow([dict[all].id, dict[all].name , dict[all].quantity, dict[all].buy_price, \
-                dict[all].buy_datums, dict[all].expiry_date, dict[all].sell_status, dict[all].sell_quantity, \
+                'in own file', dict[all].expiry_date, dict[all].sell_status, dict[all].sell_quantity, \
                 dict[all].sell_price, dict[all].sell_date])
+        
     print('Saved.')
             
 def load_CSV(dict):
