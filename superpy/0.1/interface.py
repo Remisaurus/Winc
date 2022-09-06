@@ -1,5 +1,6 @@
 import os
 import sys
+from turtle import clear
 import file_manipulation
 import date_manipulation
 import stock_manipulation
@@ -14,7 +15,7 @@ import calendar
 def push_enter():
     x = input('push enter')
 
-# function that prompts for yes or no, returns True/False (y/n).
+# function that prompts for yes or no, returns True/False ((y/n)).
 def yes_or_no():
     print('yes or no')
     x = input('')
@@ -109,7 +110,7 @@ def input_day(y, m):
         print('Invalid input, try again with a number please.')
         return input_day(y, m)
 
-# Interface, prompts for what action is wanted and redirects there, also the primary exit method. 
+# Interface, prompts for what action is wanted and redirects there. 
 def main_question():
     print('Super.Py')
     print('')
@@ -121,10 +122,10 @@ def main_question():
     print('Type \'quit\' or \'exit\' to terminate the program. Type \'reset\' to reset all data. (Important, all answers without capitals)')
     x = input('')
     if x == 'quit':
-        stock_manipulation.overwrite_to_CSV_file()
+        # save here
         sys.exit()
     elif x == 'exit':
-        stock_manipulation.overwrite_to_CSV_file()
+        # save here
         sys.exit()
     elif x == 'time':
         clearscreen()
@@ -168,7 +169,7 @@ def time_question():
     print(f'System time: {date_manipulation.get_time_now()} on date: {date_manipulation.get_date_now()}')
     print(f"Program's set time: {date_manipulation.get_time_set()} on date: {date_manipulation.get_date_set()}")
     print('') 
-    print('Type \'set\' to set, or \'reset\' to reset the program\'s time. Type \'back\' to go back.')
+    print('Type \'set\' to set, or \'reset\' to reset the programs time. Type \'back\' to go back.')
     print('all answers without capitals)')
     x = input('')
     if x == 'set':
@@ -194,8 +195,6 @@ def stock_question():
     print('Stock related business')
     print('') 
     print('Type \'stock\' to see the current inventory, \'add\' to add to the stock or \'rem\' to remove from the stock.')
-    print('Type \'sell\' to sell products from the current stock') 
-    print('All data mutations have the current set program\'s time as initiation time.')
     print('Type \'back\' to go back. (Important, answers without capitals)')
     x = input('')
     if x == 'stock':
@@ -207,9 +206,6 @@ def stock_question():
     elif x == 'add':
         clearscreen()
         add_question()
-    elif x == 'sell':
-        clearscreen()
-        sell_question()
     elif x == 'rem':
         clearscreen()
         rem_question()
@@ -229,25 +225,12 @@ def info_question():
     print(f'System time: {date_manipulation.get_time_now()} on date: {date_manipulation.get_date_now()}')
     print(f"Program's set time: {date_manipulation.get_time_set()} on date: {date_manipulation.get_date_set()}")
     print('') 
-    print('Type \'stock\' to see the current inventory. Type \'sales\' to see the total sales and profit up to the set date')
     print('Type \'ass\' to read the assignment this program has been build for, type \'help\' to read how to use the program.')
     print('Type \'back\' to go back. (all answers without capitals)')
     x = input('')
     if x == 'ass':
         clearscreen()
         information.print_assignment()
-        push_enter()
-        clearscreen()
-        info_question()
-    elif x == 'sales':
-        clearscreen()
-        stock_manipulation.print_current_sales()
-        push_enter()
-        clearscreen()
-        info_question()
-    elif x == 'stock':
-        clearscreen()
-        stock_manipulation.print_current_stock()
         push_enter()
         clearscreen()
         info_question()
@@ -317,30 +300,6 @@ def add_question():
             print('Please follow the input rules.')
             print('')
             add_question()
-            
-# Interface, prompts for number, will initiate selling_question with that number.  
-def sell_question():
-    print('Selling stock')
-    print('') 
-    print('Howmany differently named items would you like to sell? (positive whole number required)')
-    print('Momentarily the items first bought will be sold first (first in first out)')
-    print('Type \'back\' to go back. (without capitals)')
-    x = input('')
-    try:
-        if int(x) > 0:
-            clearscreen()
-            selling_question(int(x))
-            clearscreen()
-            stock_question()    
-    except ValueError:
-        if x == 'back':
-            clearscreen()
-            stock_question()
-        else:
-            print('')
-            print('Please input a proper respons.')
-            print('')
-            sell_question()
 
 # Interface, prompts for name, it will remove all items with the same name from the stock (not same as selling)
 def rem_question():
@@ -401,16 +360,10 @@ def adding_question(number):
         y = input_year()
         m = input_month()
         d = input_day(y, m)
-        stock_manipulation.add_stock(a, b, c, date_manipulation.get_date(y, m, d))
+        stock_manipulation.add_stock(a, b, c, date_manipulation.get_date_form(y, m, d).strftime("%d-%m-%Y"))
         print('added to stock.')
         push_enter()
         clearscreen()
-        
-def selling_question(number):  
-     for all in range(number+1):
-        if all == 0:
-            continue 
-        print('function not implemented yet')
         
 # function which will prompt question about items before removing them from the stock          
 def removing_question(number):
@@ -451,14 +404,17 @@ def removing_question(number):
                 
 file_manipulation.file_maker()         
 stock_manipulation.load_from_CSV_file()
-print(date_manipulation.get_date(1111, 1, 1))
+print(date_manipulation.get_date_form(1111, 1, 1))
+stock_manipulation.products[1] = stock_manipulation.product(1, 'test', 44, 5, 'now', date_manipulation.get_date_form(1111,11,11), False)
+stock_manipulation.add_stock('test', 100, 5, date_manipulation.get_date_form(1111, 11, 11))            
+stock_manipulation.add_stock('remi', 5, 100, date_manipulation.get_date_form(1111, 11, 11))
+stock_manipulation.add_stock('kara', 1, '100000', date_manipulation.get_date_form(1111, 11, 11))
+stock_manipulation.add_stock('remi', 7, 100, date_manipulation.get_date_form(1111, 11, 11))                
+               
 
-stock_manipulation.add_stock('test', 100, 5, date_manipulation.get_date(1111, 11, 11))            
-stock_manipulation.add_stock('remi', 5, 100, date_manipulation.get_date(1111, 11, 11))
-stock_manipulation.add_stock('kara', 1, '100000', date_manipulation.get_date(1111, 11, 11))
-stock_manipulation.add_stock('remi', 7, 100, date_manipulation.get_date(1111, 11, 11))                
 
-stock_manipulation.overwrite_to_CSV_file()
+#stock_manipulation.overwrite_to_CSV_file()
 stock_manipulation.print_current_stock()    
 
 
+stock_manipulation.overwrite_to_CSV_file()

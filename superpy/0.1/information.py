@@ -135,6 +135,6 @@ def print_interface_help():
           using -h as the command line extension.
           
           In time, the program's date can be set (in days from the now).
-          In stock, inventory can be added, removed, sold and the current inventory can be shown.
-          In info, you can find this file, current inventory, sales up to the set date and the assignment.
+          In stock, inventory can be added, removed or the current inventory can be shown.
+          In info, you can find this file and the assignment.
           ''')

@@ -1,18 +1,3 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-'''
 even = {1:2,3:4}
 
 print(even)
@@ -21,7 +6,10 @@ print(even[1])
 for every in even:
     print(every)
     print(even[every])
-'''
+
+
+
+
 
 
 

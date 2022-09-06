@@ -41,18 +41,16 @@ The plan is at the moment to check the whole dictionary to see which items are i
 --0.1.2b2-- 
 after a long struggle with how to save the embedded dictionary with variable length to CSV, it has been settled that the dateform items will be stored as strings and the whole dictionary as a string.
 
---0.2a--
-A big change is neccesary to get this to work. Everything I have now, I will save to an 'old' (0.1) directory, some things I will be able to incorporate into a new version, but some things will not. 
+--0.2--
+A big change is neccesary to get this to work. Everything I have now, I will save to an 'old' directory, some things I will be able to incorporate into a new version, but some things will not. 
 The most desperate change neccesary is the embedded dictionary of variable length, it is very hard to save and load, from now on all the products aquired or sold will get their own id number. another big change will be the datetime objects which from now on will be properly stored as string values.
-The code has reverted somewhat so the save/load functions could be implemented more easily. And these functions are now implemented.
---0.2b--
-A bug can be forseen if products are sold and the set time is set before that time. Those products could be sold again in that time. forseen is the stock going into the minus. However identified, this issue will not be ***************************
 
 Appendix
 To-do list (started 04-09-22, adittions are continually made since):
 stars (*) mean the item has been done.
 
-load function should be made proper. *
+second save file, and function has to be coded for embedded dic. X decision X
+load function should be made proper.
 function to compare buy dates to set date should be made.
 function to compare sell dates to set date should be made.
 function to count total number of possible sales at set date should be made. 
@@ -80,6 +78,3 @@ worked on stock manipulation and the interface to initiate it
 made a file manipulation function to write the main dictionary into a CSV file
 04-09-2022 approximatly 1 hour
 started on the function to load data and started to improve the save funtion
-06-09-2022 approximatly 6 hours 09:00 to 15:00
-In the morning a struggle ensued with saving data and the embedded dictionary for buy dates (v0.1)
-The afternoon was used to make some major changes and thereby upgrading to v0.2

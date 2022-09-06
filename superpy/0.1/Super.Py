@@ -1,7 +1,6 @@
 # Imports
 import interface # file with the makeshift interface for super.py 
-import file_manipulation # used to make, mutate and delete files and folders
-import stock_manipulation # used to make, mutate and get informed on inventory
+import file_manipulation # used to make,mutate and delete files and folders
 import argparse # Parser for command-line options, arguments and subcommands
 import sys # used to further interface with the user
 import csv # comma seperated values (major in spreadsheets and databases)
@@ -15,8 +14,8 @@ __human_name__ = "superpy"
 def main(): 
     print('')
     file_manipulation.dir_maker()  
+    file_manipulation.file_maker()
     file_manipulation.time_file_maker()
-    stock_manipulation.load_from_CSV_file()
     print('')
     interface.interface()
 '''
