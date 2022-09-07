@@ -1,10 +1,10 @@
 import stock_manipulation
 
 def test_stock_manipulation():
-    stock_manipulation.products[1] = stock_manipulation.product(1, 'test', 44, 5.5, 'now','not yet', False)
-    stock_manipulation.products[2] = stock_manipulation.product(2, 'testprod', 44, 5.5, 'now','not yet', False)
-    stock_manipulation.products[3] = stock_manipulation.product(3, 'prodtest', 44, 5.5, 'now','not yet', False)
-    stock_manipulation.products[4] = stock_manipulation.product(4, 'test', 44, 6.5, 'tomorrow','not yet', False)
+    stock_manipulation.products[1] = stock_manipulation.product(1, 'test', 44, 5.5, '5-9-2022','9-9-9999', False, 0, 0, '31-12-9999')
+    stock_manipulation.products[2] = stock_manipulation.product(2, 'testprod', 44, 5.5, '5-9-2022','9-9-9999', False, 0, 0, '31-12-9999')
+    stock_manipulation.products[3] = stock_manipulation.product(3, 'prodtest', 44, 5.5, '5-9-2022','9-9-9999', False, 0, 0, '31-12-9999')
+    stock_manipulation.products[4] = stock_manipulation.product(4, 'test', 44, 6.5, '6-9-2022','9-9-9999', False, 0, 0, '31-12-9999')
     
     assert stock_manipulation.products[1].quantity == 44
     
@@ -20,22 +20,12 @@ def test_product_id_checker():
     assert stock_manipulation.product_id_checker('prodtest') == [3]
     assert stock_manipulation.product_id_checker('product') == False
     
-def test_new_product_is_different():
-    assert stock_manipulation.new_product_is_different('test', 'not yet', 6.5, True) == True
-    assert stock_manipulation.new_product_is_different('test', 'not yet', 6.5, False) == 4
-    assert stock_manipulation.new_product_is_different('test', 'not yet', 5.5, False) == 1
-    assert stock_manipulation.new_product_is_different('test', 'yet', 5.5, False) == True
-    stock_manipulation.products[55] = stock_manipulation.product(55, 'prodtest', 44, 6.5, 'now','not yet', False)
-    assert stock_manipulation.new_product_is_different('prodtest', 'not yet', 6.5, False) == 55
     
 def test_add_stock():
-    stock_manipulation.add_stock('new stuff', 50, 1, 'now')
-    assert stock_manipulation.products[56].name == 'new stuff'
-    assert type(stock_manipulation.products[56].buy_datums) == type({})
-    assert stock_manipulation.products[1].quantity == 44
-    stock_manipulation.add_stock('test', 100, 5.5, 'not yet')
-    assert stock_manipulation.products[1].quantity == 144
-    assert len(stock_manipulation.products[1].buy_datums) == 2
+    stock_manipulation.add_stock('new stuff', 50, 1, '11-11-3111')
+    assert stock_manipulation.products[5].name == 'new stuff'
+    stock_manipulation.add_stock('test', 100, 5.5, '11-11-3111')
+    assert stock_manipulation.products[6].quantity == 100
    
 def test_removing_stock():
     assert stock_manipulation.removing_stock('Not here') == 'not found'
@@ -48,7 +38,20 @@ def test_removing_stock():
     try:
         assert not stock_manipulation.products[4]
     except KeyError:
-        assert stock_manipulation.products[55].name == 'prodtest'
+        assert stock_manipulation.products[3].name == 'prodtest'
     assert stock_manipulation.products[2].name == 'testprod'
-    assert stock_manipulation.products[55].name == 'prodtest'
+    assert stock_manipulation.products[3].name == 'prodtest'
+
+def test_selling_stock():
+    assert stock_manipulation.selling_stock('new stuff', 100, 10) == 'not enough inventory'
+    assert stock_manipulation.selling_stock('new stuff', 22, 10) == 'done'
+    assert stock_manipulation.products[5].quantity == 28
+    assert stock_manipulation.products[6].sell_status == True
+    
+def test_sellable_stock_and_expired_items():
+    assert stock_manipulation.print_expired_items() == 'no loss'
+    assert stock_manipulation.sellable_stock('new stuff') == 28
+    stock_manipulation.add_stock('new stuff', 10000000, 0.1, '1-1-1111')
+    assert stock_manipulation.sellable_stock('new stuff') == 28
+    assert stock_manipulation.print_expired_items() ==  1000000
     

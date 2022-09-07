@@ -193,8 +193,8 @@ def time_question():
 def stock_question():
     print('Stock related business')
     print('') 
-    print('Type \'stock\' to see the current inventory, \'add\' to add to the stock or \'rem\' to remove from the stock.')
-    print('Type \'sell\' to sell products from the current stock') 
+    print('Type \'stock\' to see the current sellable inventory, \'add\' to add to the stock or \'rem\' to remove from the stock.')
+    print('Type \'sell\' to sell products from the current sellable stock') 
     print('All data mutations have the current set program\'s time as initiation time.')
     print('Type \'back\' to go back. (Important, answers without capitals)')
     x = input('')
@@ -229,8 +229,9 @@ def info_question():
     print(f'System time: {date_manipulation.get_time_now()} on date: {date_manipulation.get_date_now()}')
     print(f"Program's set time: {date_manipulation.get_time_set()} on date: {date_manipulation.get_date_set()}")
     print('') 
-    print('Type \'stock\' to see the current inventory. Type \'sales\' to see the total sales and profit up to the set date')
+    print('Type \'stock\' to see the current sellable inventory. Type \'sales\' to see the total sales and profit up to the set date')
     print('Type \'ass\' to read the assignment this program has been build for, type \'help\' to read how to use the program.')
+    print('type \'exp\' to see a list of expired items')
     print('Type \'back\' to go back. (all answers without capitals)')
     x = input('')
     if x == 'ass':
@@ -242,6 +243,12 @@ def info_question():
     elif x == 'sales':
         clearscreen()
         stock_manipulation.print_current_sales()
+        push_enter()
+        clearscreen()
+        info_question()
+    elif x == 'exp':
+        clearscreen()
+        stock_manipulation.print_expired_items()
         push_enter()
         clearscreen()
         info_question()
@@ -297,7 +304,7 @@ def set_question():
             
 # Interface, prompts for number, will initiate adding_question with that number   
 def add_question():
-    print('Adding stock')
+    print('Adding/buying stock')
     print('') 
     print('Howmany differently named items would you like to add? (positive whole number required)')
     print('Type \'back\' to go back. (without capitals)')
@@ -406,11 +413,64 @@ def adding_question(number):
         push_enter()
         clearscreen()
         
+# function which will prompt questions about items before selling those items from the stock            
 def selling_question(number):  
      for all in range(number+1):
         if all == 0:
             continue 
-        print('function not implemented yet')
+        print(f'product number {all}')
+        print('')
+        def get_name2():
+            print('product\'s name? (type exit to stop selling products)')
+            a = input('name: ')
+            if a == 'exit':
+                clearscreen()
+                stock_question()
+            exists = stock_manipulation.product_exists(a)
+            if exists == False:
+                print('no product by that name found in inventory')
+                print('you may retry or type \'exit\'')
+                push_enter()
+                print ('')
+                return get_name2()
+            sellable = stock_manipulation.sellable_stock(a)
+            if sellable <= 0:
+                print('')
+                print('that product does not have a sellable quantity in stock')
+                print('you may retry or type \'exit\'')
+                push_enter()
+                print ('')
+                return get_name2()
+            return a
+        a = get_name2()
+        print('')
+        sellable = stock_manipulation.sellable_stock(a)
+        def input_sell_quantity():
+            print('quantity? (type exit to stop selling products)')
+            b = input_positive_number()
+            if b == 'exit':
+                clearscreen()
+                stock_question()
+            elif b > sellable:
+                print('')
+                print('that product does not have enough sellable quantity in stock')
+                print(f'product {a}, has a maximum sellable stock of: \"{sellable}\".')
+                print('you may retry or type \'exit\'')
+                push_enter()
+                print ('')
+                return input_sell_quantity()
+            return b
+        b = input_sell_quantity()
+        print('')
+        print('price at which the product was sold? (type exit to stop adding products)')
+        c = input_positive_number()
+        if c == 'exit':
+            clearscreen()
+            stock_question()
+        stock_manipulation.selling_stock(a, b, c)
+        print('sold from stock.')
+        push_enter()
+        clearscreen()
         
 # function which will prompt question about items before removing them from the stock          
 def removing_question(number):
@@ -449,16 +509,20 @@ def removing_question(number):
                     break
                 
                 
-file_manipulation.file_maker()         
-stock_manipulation.load_from_CSV_file()
-print(date_manipulation.get_date(1111, 1, 1))
+# more testing area:
+     
+#stock_manipulation.load_from_CSV_file()
 
-stock_manipulation.add_stock('test', 100, 5, date_manipulation.get_date(1111, 11, 11))            
-stock_manipulation.add_stock('remi', 5, 100, date_manipulation.get_date(1111, 11, 11))
+stock_manipulation.add_stock('testing', 100, 5, date_manipulation.get_date(1111, 11, 11))            
+stock_manipulation.add_stock('remi', 5, 100, date_manipulation.get_date(2222, 11, 11))
 stock_manipulation.add_stock('kara', 1, '100000', date_manipulation.get_date(1111, 11, 11))
-stock_manipulation.add_stock('remi', 7, 100, date_manipulation.get_date(1111, 11, 11))                
+stock_manipulation.add_stock('remi', 7, 100, date_manipulation.get_date(2111, 11, 11))  
+stock_manipulation.selling_stock('remi',5,1)    
+#stock_manipulation.print_expired_items()              
+#print(stock_manipulation.sellable_stock('remi'))
+#stock_manipulation.overwrite_to_CSV_file()
+stock_manipulation.print_current_stock()
 
-stock_manipulation.overwrite_to_CSV_file()
-stock_manipulation.print_current_stock()    
+  
 
 

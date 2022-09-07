@@ -1,6 +1,5 @@
 import os
 import csv
-import datetime
 import stock_manipulation
 
 # Constants for directories and files used in the code
@@ -67,8 +66,7 @@ def overwrite_CSV(dict):
     file_maker()
     with open(CURRENT_STOCK_FILE, 'w', newline='') as boss:
         writer = csv.writer(boss, delimiter=';')
-        for all in dict:   
-            # (['id', 'name', 'quantity', 'buy price', 'buy datums', 'expiry date', 'sell status', 'sell quantity', 'sell price', 'sell date'])
+        for all in dict:
             writer.writerow([dict[all].id, dict[all].name , dict[all].quantity, dict[all].buy_price, \
                 dict[all].buy_date, dict[all].expiry_date, dict[all].sell_status, \
                 dict[all].sell_quantity, dict[all].sell_price, dict[all].sell_date])
@@ -81,8 +79,6 @@ def load_CSV(dict):
         with open(CURRENT_STOCK_FILE, 'r') as boss:
             reader = csv.reader(boss, delimiter = ';')
             for row in reader:
-                # (['id', 'name', 'quantity', 'buy price',\
-                #'buy date', 'expiry date', 'sell status', 'sell quantity', 'sell price', 'sell date'])
                 dict[int(row[0])] = stock_manipulation.product(int(row[0]), row[1], int(row[2]), int(row[3]), \
                    row[4], row[5], row[6], row[7], row[8], row[9])
         print('file loaded.')

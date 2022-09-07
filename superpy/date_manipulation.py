@@ -62,11 +62,26 @@ def get_date_set_datetime_form():
     return (datetime.datetime.now() + datetime.timedelta(days = days_to_change))
     
 # function to check if argument date is earlier or same as the set date. Returns False if not
-# date structure should be: datetime.datetime(yyyy, mm, dd)
-def expired_check(date):
-    if date <= get_date_set_datetime_form():
+def earlier_check(date):
+    dateform = datetime.datetime.strptime(date, '%d-%m-%Y')
+    if dateform <= get_date_set_datetime_form():
         return True
-    elif date > get_date_set_datetime_form():
+    elif dateform > get_date_set_datetime_form():
         return False
     
+# function to check if argument date is later or same as the set date. Returns False if not
+def later_check(date):
+    dateform = datetime.datetime.strptime(date, '%d-%m-%Y')
+    if dateform >= get_date_set_datetime_form():
+        return True
+    elif dateform < get_date_set_datetime_form():
+        return False
+
+# returns datetime object from string used by this code
+def get_string_in_date_form(date):
+   return datetime.datetime.strptime(date, '%d-%m-%Y')
+
+# returns result of comparing dates with >=
+def compare_dates(date1, date2):
+    return date1 >= date2
     

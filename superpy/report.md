@@ -46,18 +46,29 @@ A big change is neccesary to get this to work. Everything I have now, I will sav
 The most desperate change neccesary is the embedded dictionary of variable length, it is very hard to save and load, from now on all the products aquired or sold will get their own id number. another big change will be the datetime objects which from now on will be properly stored as string values.
 The code has reverted somewhat so the save/load functions could be implemented more easily. And these functions are now implemented.
 --0.2b--
-A bug can be forseen if products are sold and the set time is set before that time. Those products could be sold again in that time. forseen is the stock going into the minus. However identified, this issue will not be ***************************
+As the logic is set now, selling an item will reduce the quantity of available items to the past as well as future. This will prevent the possibility to go back in time and sell the same product multiple times.
+during coding the sell functions, a problem came to light that products could be sold in stages with multiple sell_prices. extra logic has been coded for those possibilities. with the lack of better ideas without using an embedded dictionary (saving to csv becomes horrible). products with a quantity that is only partly sold will get a new entry in the dictionary with a true sell_status (sold).
+pytesting files have been updated to apply better to the new code of v0.2 and some new tests have been made. 
+The show stock function has been updated to show every same named item once, with its total sellable inventory.
+The show expired products will now return a total loss due to expired products.
+The sell function has been integrated into the interface, and now stock can be sold from there.
 
 Appendix
 To-do list (started 04-09-22, adittions are continually made since):
-stars (*) mean the item has been done.
+stars (*) mean the item has been finished.
 
 load function should be made proper. *
-function to compare buy dates to set date should be made.
-function to compare sell dates to set date should be made.
-function to count total number of possible sales at set date should be made. 
-function to create sales should be made. (including deducting them from stock at set time.)
-show stock function has to be fixed to implement products not yet bought and are going to be bought.
+print_current_sales():
+print_expired_items(): *
+print_current_stock(): *
+function to compare buy dates to set date should be made. *
+function to compare sell dates to set date should be made. *
+function to count total number of possible sales at set date should be made. *
+function to create sales should be made. (including deducting them from stock at set time.) *
+implement selling to interface *
+testing with superpy <-----------
+show stock function has to be fixed to implement products not yet bought and are going to be bought. *
+show stock function should show every name once and sellable stock only *
 show sales function (up till set date) should be made.
 interface integration for command lines
 
@@ -83,3 +94,7 @@ started on the function to load data and started to improve the save funtion
 06-09-2022 approximatly 6 hours 09:00 to 15:00
 In the morning a struggle ensued with saving data and the embedded dictionary for buy dates (v0.1)
 The afternoon was used to make some major changes and thereby upgrading to v0.2
+07-09-2022 approximatly 8 hours 08:00 to 16:00
+The selling function is now complete and ready to be implemented, a partial sale will make a new entry into the dictionary of a completely sold item, remaining items will be in entry already there.
+making the test files proper for pytest ensued hereafter.
+The sell function has been made and implemented with the interface.
