@@ -28,4 +28,7 @@ def test_later_check():
     assert not date_manipulation.later_check('1-1-1000') 
     assert date_manipulation.later_check('31-12-9999') 
     
+def test_compare_dates_greater():
+    assert date_manipulation.compare_dates_greater(date_manipulation.get_date(2222, 2, 2), date_manipulation.get_date_now())
+    
     

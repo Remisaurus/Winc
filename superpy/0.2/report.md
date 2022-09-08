@@ -55,8 +55,6 @@ The stored prices are now correctly seen as floats as opposed to integers.
 The sales functions have been produced and integrated into the interface thereby completing the initial functionality of the program and laying a way to v0.3 where the command-line interface will be founded.
 
 --0.3a--
-support made for selling/buying using command-lines.
-
 
 Appendix
 To-do list (started 04-09-22, adittions are continually made since):
@@ -71,18 +69,13 @@ function to compare sell dates to set date should be made. *
 function to count total number of possible sales at set date should be made. *
 function to create sales should be made. (including deducting them from stock at set time.) *
 implement selling to interface *
-testing with superpy *
+testing with superpy <-----------
 show stock function has to be fixed to implement products not yet bought and are going to be bought. *
 show stock function should show every name once and sellable stock only *
 show sales function (up till set date) should be made. *
 interface integration for command lines
-    buy *
-    sell *
-    show stock 
-    show expired items
-    show sales day
-    show sales up to date 
-    
+
+
 
 Appendix
 timeline:
@@ -108,8 +101,7 @@ The afternoon was used to make some major changes and thereby upgrading to v0.2
 The selling function is now complete and ready to be implemented, a partial sale will make a new entry into the dictionary of a completely sold item, remaining items will be in entry already there.
 making the test files proper for pytest ensued hereafter.
 The sell function has been made and implemented with the interface.
-08-09-2022 approximatly 8 hours 08:30 to 16:30
+08-09-2022 approximatly x hours 08:30 to 
 sales data can now be shown.
 version 0.2 is finished with all functionality required. version 0.3 will have command-line interface integrated and will be submitted.
-started with the command-line interface and with it v0.3
 

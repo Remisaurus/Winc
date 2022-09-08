@@ -46,7 +46,7 @@ def test_selling_stock():
     assert stock_manipulation.selling_stock('new stuff', 100, 10) == 'not enough inventory'
     assert stock_manipulation.selling_stock('new stuff', 22, 10) == 'done'
     assert stock_manipulation.products[5].quantity == 28
-    assert stock_manipulation.products[6].sell_status == True
+    assert stock_manipulation.products[6].sell_status == 'True'
     
 def test_sellable_stock_and_expired_items():
     assert stock_manipulation.print_expired_items() == 'no loss'

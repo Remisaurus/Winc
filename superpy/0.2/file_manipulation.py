@@ -81,10 +81,10 @@ def load_CSV(dict):
         with open(CURRENT_STOCK_FILE, 'r') as boss:
             reader = csv.reader(boss, delimiter = ';')
             for row in reader:
-                dict[int(row[0])] = stock_manipulation.product(int(row[0]), row[1], int(row[2]), float(row[3]),\
+                dict[int(row[0])] = stock_manipulation.product(int(row[0]), row[1], int(row[2]), float(row[3]), \
                    row[4], row[5], row[6], int(row[7]), float(row[8]), row[9])
         print('file loaded.')
-    except:
+    except ValueError:
         print('The save file seems to be corrupted. Not all saved data may be loaded.') 
         print('A reset is recommended.')
 
