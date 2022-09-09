@@ -87,5 +87,3 @@ def load_CSV(dict):
     except:
         print('The save file seems to be corrupted. Not all saved data may be loaded.') 
         print('A reset is recommended.')
-
-

@@ -565,6 +565,7 @@ def sales_set_question():
         print('')
         sales_set_question()
         
+# Interface, prompts about if you want to see the sales up to the set date or your own.           
 def sales_till_question():
     print('Aquiring sales data until a set date.')
     print('') 

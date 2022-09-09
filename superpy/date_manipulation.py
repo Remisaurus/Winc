@@ -89,4 +89,3 @@ def compare_dates_greater(date1, date2):
     a = datetime.datetime.strptime(date1, '%d-%m-%Y')
     b = datetime.datetime.strptime(date2, '%d-%m-%Y')
     return a > b
-

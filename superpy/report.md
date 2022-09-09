@@ -19,6 +19,7 @@ Initially,
 There were no problems which I found really hard or could not solve by using my 'favourite' search engine. The biggest troubles I have had with this assignment so far were starting it and the amount of work I would have to put into it.
 One of the things I found difficult initially was testing with pytest. I did start with testing the file_manipulator.py, this did not seem to be hard. But when I started with input() I kind of left the pytest behind and started testing 'oldschool' with print() and breakpoint() statements.  
 
+
 chapter 2,
 in the course of,
 --0.1.1a-- As soon as I started the stock_manipulation file it hit me how hard this was going to be. problems were amassing faster than I could solve them and soon I needed paper to keep track of them. I decided to hold of the CSV for now and incorporate it later to store/retrieve information, and to go forward using tools I am familiar with like dictionaries. 
@@ -56,9 +57,17 @@ The sales functions have been produced and integrated into the interface thereby
 
 --0.3a--
 support made for selling/buying using command-lines.
+--0.3f--
+a full support of command lines is available, many little things are still possible to improve upon, but testing the program should ensue.
+Functionality seems to be high enough that I am submitting this version to my educational institute.
 
 
-Appendix
+chapter 3,
+Conclusion and continuation,
+This chapter has yet to be written.
+
+
+Appendix 1,
 To-do list (started 04-09-22, adittions are continually made since):
 stars (*) mean the item has been finished.
 
@@ -75,16 +84,19 @@ testing with superpy *
 show stock function has to be fixed to implement products not yet bought and are going to be bought. *
 show stock function should show every name once and sellable stock only *
 show sales function (up till set date) should be made. *
-interface integration for command lines
+interface integration for command lines *
     buy *
     sell *
-    show stock 
-    show expired items
-    show sales day
-    show sales up to date 
+    show stock *
+    show expired items *x2*
+    show sales day *
+    show sales up to date *
+    reset *
+    remove *
+sales of the same named item that are also made on the same day at the same price should stack 
     
 
-Appendix
+Appendix 2,
 timeline:
 29-08-2022 approximately 6 hours. 08:00 to 14:00
 A file structure has been made as well as the code for file manipulation. a start has been made with the interface, and the date manipulation code. 
@@ -112,4 +124,6 @@ The sell function has been made and implemented with the interface.
 sales data can now be shown.
 version 0.2 is finished with all functionality required. version 0.3 will have command-line interface integrated and will be submitted.
 started with the command-line interface and with it v0.3
+09-09-2022
+I finished version 0.3 around 11:30 EST. I will submit it shortly. the code supports full command-line control, and is ready to be graded.
 

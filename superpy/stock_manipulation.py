@@ -59,16 +59,19 @@ def add_stock(product_name, quantity, buy_price, expiry_date):
 def removing_stock(product_name):
     to_remove_list = product_id_checker(product_name)
     if to_remove_list == False:
+        print(f'could not find: {product_name}.')
         return 'not found'
     else:
         for id in to_remove_list:
             del products[id]
+    print(f'removed {len(to_remove_list)} item(s) from all entries.')
 
 # function that checks howmuch stock of a particular name is available for selling on the program' set date        
 def sellable_stock(name):
     stock_counter = 0
     if product_id_checker(name) == False:
         print(f'could not find {name} in inventory')
+        return 0
     else:
         name_list = product_id_checker(name)
         for entry in name_list:
@@ -126,7 +129,7 @@ def print_expired_items():
         print('')
         print('No items are expired at this set date')
         return 'no loss'
-    print(f'The total losses from expired items is: {loss_count}.')
+    print(f'\nThe total losses from expired items up to the set date is: {loss_count}.\n')
     return loss_count
 
 # function that prints a list of expired items up to a given date.
@@ -148,7 +151,7 @@ def get_expired_items(date):
         print('')
         print(f'No items are expired before {date}')
         return 0
-    print(f'The total losses from expired items is: {loss_count}.')
+    print(f'\nThe total losses from expired items on {date} is: {loss_count}.\n')
     return loss_count
 
 # function that sells product from list aquired the earliest (first in first out) until full quantity is sold.
@@ -211,7 +214,7 @@ have been sold for {products[product].sell_price} each. Making {products[product
         print(f'No sales found on {date}')
         return 'None'
     print('')
-    print(f'the total of sales on {date} are: \'{total}\'. These products had cost {total_buy_price}.')
+    print(f'the total of sales on {date} are: \'{total}\'. These products had a cost of {total_buy_price}.')
     return total
 
 # prints the sales made in all time prior to and including the date provided as argument, also returns the total of these sales.
@@ -241,10 +244,12 @@ have been sold for {products[product].sell_price} each. Making {products[product
     return total
  
 # Refers inner dictionary to be saved
+# not tested with pytest
 def overwrite_to_CSV_file():
     file_manipulation.overwrite_CSV(products)
     
 # Refers inner dictionary to be loaded
+# not tested with pytest
 def load_from_CSV_file():
     file_manipulation.load_CSV(products)
     

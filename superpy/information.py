@@ -132,9 +132,9 @@ def print_interface_help():
           To use the interface, start it and follow the onscreen instructions.
           The program can also be controlled with command lines.
           More information on the command lines can be found in the help file you can retrieve 
-          using -h as the command line extension.
+          using -h or --help as the command line extension.
           
           In time, the program's date can be set (in days from the now).
           In stock, inventory can be added, removed, sold and the current inventory can be shown.
-          In info, you can find this file, current inventory, info on sales and the assignment.
+          In info, you can find this file, current inventory, info on sales, info on expired items and the assignment.
           ''')
