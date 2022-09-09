@@ -58,17 +58,21 @@ def interface():
 # function to input positive number or zero, returns positive integer or zero.    
 def input_positive_number():
     this = input('positive number or 0: ')
-    try:
-        if int(this) >= 0:
-            return int(this)
-    except ValueError:
-        if this == 'exit':
+    if this == 'exit':
             # question has been integrated in the interface where the exit to stock_question should be possible.
             clearscreen()
             stock_question() 
+    try:
+        if int(this) >= 0:
+            return int(this)
         else:
             print('Input will need to be a whole number that is 0 or higher. Try again.')
             return input_positive_number()
+    except:
+        print('Input will need to be a whole number that is 0 or higher. Try again.')
+        return input_positive_number()
+        
+        
 
 # function to input year (between 1000 and 9999).    
 def input_year():
