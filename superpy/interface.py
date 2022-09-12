@@ -44,8 +44,14 @@ def yes_or_no():
 
 # function to clear the screen
 def clearscreen():
-    os.system('cls')
-
+    try:
+        os.system('cls')
+    except:
+        try:
+            os.system('clear')
+        except:
+            print('tried and failed to clear the screen.')
+            
 # Interface, prompts for interface start.    
 def interface():
     print('start interface?')

@@ -60,10 +60,14 @@ support made for selling/buying using command-lines.
 --0.3f--
 a full support of command lines is available, many little things are still possible to improve upon, but testing the program should ensue.
 Functionality seems to be high enough that I am submitting this version to my educational institute.
+--0.3f-- 
+Added a small line to get the program to work properly on other operating systems.
+beware that the program makes a data folder in the current working dir and deletes files from there when is told to reset!...
 
 
 chapter 3,
 Conclusion and continuation,
+small updates are made for cross-platform functionality.
 This chapter has yet to be written.
 
 
@@ -94,6 +98,7 @@ interface integration for command lines *
     reset *
     remove *
 sales of the same named item that are also made on the same day at the same price should stack 
+crossplatform *
     
 
 Appendix 2,
@@ -124,6 +129,7 @@ The sell function has been made and implemented with the interface.
 sales data can now be shown.
 version 0.2 is finished with all functionality required. version 0.3 will have command-line interface integrated and will be submitted.
 started with the command-line interface and with it v0.3
-09-09-2022
+09-09-2022 approximatly 4 hours 07:30 to 11:30
 I finished version 0.3 around 11:30 EST. I will submit it shortly. the code supports full command-line control, and is ready to be graded.
-
+12-09-2022 approximatly 0.5 hours
+Small updates for cross platform functionality.
