@@ -5,12 +5,11 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <!-- We use url_for to link a stylesheet named `style.css` within the folder 'static' here. -->
+        <!-- Use url_for to link a stylesheet named `style.css` here. -->
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css') }}" />
 
         <!-- Use Jinja to put a title here. -->
-        {% block title %}
-        {% endblock %}
+        <title>{{ title }}</title>
     </head>
 
     <body>
@@ -19,7 +18,8 @@
         <ul>
             <li><a href="/home">Home</a></li>
             <li><a href="/about">About</a></li>
-            <li><a href="/content">Content</a></li>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/lon">League of Nations</a></li>
         </ul>
         {% block content %}
         {% endblock %}
