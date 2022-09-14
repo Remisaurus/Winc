@@ -11,7 +11,7 @@ app = Flask(__name__)
 app.secret_key = os.urandom(16)
 
 
-@app.route("/home")
+@app.route("/home/")
 def redirect_index():
     return redirect(url_for("index"))
 
@@ -30,31 +30,47 @@ def about():
 def lon():
     return render_template("lon.html", title="League of Nations")
 
-@app.route('/success/<username>')
-def success(name):
-   return 'welcome %s' % name
-
-
-@app.route("/login", methods=["GET", "POST"])
-def login():    
+@app.route('/password/<name>', methods=["GET", "POST"])
+def password(name):
+    if name not in get_users():
+        return redirect(url_for('login'))
     if request.method == 'POST':
-        user = request.form['username']
-        return redirect(url_for('success',username = user))
+            password = request.form['password']
+            if hash_password(password) == get_users()[name]:
+                session[name] = name
+                return redirect(url_for('dashboard', name=name))
+            else:
+                return render_template('password.html', title='login2error', name=name)      
     else:
-        user = request.args.get('nm')
-        return redirect(url_for('Fail',name = user))
+            return render_template('password.html', title='login2', name=name)
+        
+@app.route('/dashboard/<name>')
+def dashboard(name):
+    if name in session:
+        return render_template('dashboard.html', name=name)
+    else:
+        return 'Access denied. try logging in again from step 1.'
+        
+        
+
+    
+    
+@app.route("/login/", methods=["GET", "POST"])
+def login():  
+    if request.method == 'POST':
+            user = request.form['username']
+            if user in get_users():
+                return redirect(url_for('password', name=user))
+            else:
+                return render_template('login.html', title='loginerror')
+    else:
+        return render_template('login.html', title='login')
 
 
-@app.route("/dashboard")
-def dashboard():
-    # YOUR SOLUTION HERE
-    pass
-
-
-@app.route("/logout", methods=["GET", "POST"])
-def logout():
-    # YOUR SOLUTION HERE
-    pass
+@app.route("/logout/<name>", methods=["GET", "POST"])
+def logout(name):
+    session.pop(name)
+    return render_template('logout.html')
 
 if __name__ == '__main__':
    app.run(debug = True)

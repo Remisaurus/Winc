@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
-<!-- Your solution here. -->
+<h1> Hello and welcome {{name}}.</h1>
+<p>just so you know, your password is easy and we will not keep this safe.</p>
+<p>you can not change it and you will find it back on many places including Winc Academy lessons.</p>
+
+<li><a href="/logout/{{name}}">Logout</a></li>
+
 {% endblock content %}
 
