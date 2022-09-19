@@ -21,15 +21,5 @@ def about():
 def content():
    return render_template('content.html')
 
-
-
-'''
-Now write a Flask app that conforms to the specification in the following table.
-Method	Path	Expected Response
-GET	/	A rendering of the template index.html with the <title>: Index
-GET	/about	A rendering of the template about.html with the <title>: About
-Up to this point, you can test your work with pytest.
-'''
-
 if __name__ == '__main__':
    app.run(debug = True)
