@@ -1,6 +1,6 @@
 import peewee
 
-db = peewee.SqliteDatabase(":memory:")
+db = peewee.SqliteDatabase(":memory:", pragmas={'foreign_keys': 1})
 
 
 class Ingredient(peewee.Model):
@@ -26,7 +26,7 @@ class Dish(peewee.Model):
     name = peewee.CharField()
     served_at = peewee.ForeignKeyField(Restaurant)
     price_in_cents = peewee.IntegerField()
-    ingredients = peewee.ManyToManyField(Ingredient)
+    ingredients = peewee.ManyToManyField(Ingredient, backref='in dish')
 
     class Meta:
         database = db
