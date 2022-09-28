@@ -1,0 +1,31 @@
+Write a Python program that reads text from stdin,
+ filters a given character from it and writes the result to stdout.
+ The number of characters removed should be written to stderr. For example:
+
+$ echo 'abc' | python main.py a
+bc
+1
+
+$ echo 'aabccc' | python main.py c
+aab
+3
+
+$
+You may not use the argparse module to parse the arguments to your program this time.
+You can find a list of the arguments in sys.argv, 
+and you may assume that the argument is always a single character.
+
+Tip
+
+If it is not redirected in some way, 
+stderr is printed to your terminal right along side of stdout. 
+While you're working on debugging your program you can add some text that tells you which stream you're looking at. 
+We will later discuss how to redirect I/O streams.
+
+When you start the assignment with Wincpy, you should see a file named random.txt inside the stds directory. 
+You can read this file with cat and feed it to the stdin of your program by using the pipe symbol (|):
+
+# This shows the first line of random.txt with all occurences of `a` removed
+$ cat random.txt | python main.py a | head -n 1
+0000000 8294 e3 d6b3 4167 0ef b1c8 952 e78
+You can use pytest to test your implementation with the tests supplied in test_main.py.
