@@ -15,16 +15,13 @@ app.secret_key = os.urandom(16)
 def redirect_index():
     return redirect(url_for("index"))
 
-
 @app.route("/")
 def index():
     return render_template("index.html", title="Index")
 
-
 @app.route("/about")
 def about():
     return render_template("about.html", title="About")
-
 
 @app.route("/lon")
 def lon():
@@ -50,10 +47,6 @@ def dashboard(name):
         return render_template('dashboard.html', name=name)
     else:
         return 'Access denied. try logging in again from step 1.'
-        
-        
-
-    
     
 @app.route("/login/", methods=["GET", "POST"])
 def login():  
