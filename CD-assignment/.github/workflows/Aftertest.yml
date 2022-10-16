@@ -1,0 +1,27 @@
+on: 
+  repository_dispatch:
+    types: [trigger-Aftertest]
+
+
+jobs:
+  let_VPS_pull:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+ 
+    - name: Command VPS
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        USERNAME: ${{ secrets.USERNAME }}
+        PORT: ${{ secrets.PORT }}
+        KEY: ${{ secrets.SSHKEY }}
+        script: |
+            git clean  -d  -f .
+            echo && hostname
+            cd /var/www/CD-assignment
+            git checkout VPS
+            git fetch origin
+            git merge origin 
+            systemctl restart CD
+        
